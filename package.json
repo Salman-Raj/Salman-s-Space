@@ -9,6 +9,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@fazeelanizam13/starry-sky": "^1.0.2",
+    "@stianlarsen/meteors": "^1.0.9",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
