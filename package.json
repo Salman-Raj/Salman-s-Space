@@ -9,11 +9,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@fazeelanizam13/starry-sky": "^1.0.2",
-    "@stianlarsen/meteors": "^1.0.9",
+    "framer-motion": "^12.22.0",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-simple-typewriter": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Menu,
   X,
@@ -12,8 +12,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-import { Meteors } from "@stianlarsen/meteors";
-import StarrySky from "@fazeelanizam13/starry-sky";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,6 +20,22 @@ function App() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const names = [
+    "Salman Raju Makireddy",
+    "Mobile App Developer",
+    "Full Stack Developer",
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % names.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="app">
@@ -77,55 +92,53 @@ function App() {
             zIndex: 0,
             pointerEvents: "none",
           }}
-        >
-          <Meteors
-            speed={2}
-            size={60}
-            amount={20}
-            colorLightmode="rgba(255, 255, 255, 0.8)"
-            colorDarkmode="rgba(255, 255, 255, 0.8)"
-            // fallingSide="top" // falling from top to bottom
-            style={{
-              color: "red",
-            }}
-          />
-        </div>
+        ></div>
 
-        <div
-          className="hero-content"
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          <div className="hero-content">
-            <div className="hero-text">
-              <h1>
-                Hi, I'm <span style={{ color: "#5252d4" }}> Salman Raju</span>
-              </h1>
-              <h2>Full Stack Developer & App Developer</h2>
-              <p>
-                I create beautiful and functional websites that deliver
-                exceptional user experiences.
-              </p>
-              <div className="button-group">
-                <a
-                  href="https://drive.google.com/file/d/1Glrh8xJq35NyFyd6EzkLWG-Ou6qIsAZS/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="button button-primary"
-                >
-                  <Download size={20} />
-                  Download CV
-                </a>
-                <a href="#contact" className="button button-outline">
-                  Contact Me
-                </a>
-              </div>
+        <div className="hero-content">
+          <div className="hero-text">
+            <h1>
+              Hi, I'm{" "}
+              <span style={{ color: "#5252d4" }}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={names[index]}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.5 }}
+                    style={{ display: "inline-block", color: "#5252d4" }}
+                  >
+                    {names[index]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </h1>
+            <h2>Full Stack Developer & App Developer</h2>
+            <p>
+              I create beautiful and functional websites that deliver
+              exceptional user experiences.
+            </p>
+            <div className="button-group">
+              <a
+                href="https://drive.google.com/file/d/1Q1AeEpHSaFCKfXEfvWnOMYNhyeo8R5QN/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button-primary"
+              >
+                <Download size={20} />
+                Download CV
+              </a>
+              <a href="#contact" className="button button-outline">
+                Contact Me
+              </a>
             </div>
-            <div className="hero-image">
-              <img
-                src="https://res.cloudinary.com/dqvaejele/image/upload/v1746000775/1746000360711_ird2nm.jpg"
-                alt="Professional headshot"
-              />
-            </div>
+          </div>
+
+          <div className="hero-image">
+            <img
+              src="https://res.cloudinary.com/dqvaejele/image/upload/v1746000775/1746000360711_ird2nm.jpg"
+              alt="Professional headshot"
+            />
           </div>
         </div>
       </section>
@@ -184,18 +197,18 @@ function App() {
               "JavaScript",
               "TypeScript",
               "Python",
-              "MongoDB",
-              "PostgreSQL",
+              "React Query",
+              "Redux toolkit",
+              "Context",
+              "Zustand",
+              "MySQL",
               "Express.js",
               "HTML/CSS",
-              "Tailwind CSS",
               "Git",
-              "Docker",
-              "AWS",
               "Figma",
-              "UI/UX Design",
+              "CI/CD",
               "RESTful APIs",
-              "GraphQL",
+              "Firebase",
             ].map((skill) => (
               <div key={skill} className="skill-item">
                 <p>{skill}</p>
@@ -227,7 +240,7 @@ function App() {
                 // link: "https://github.com/salmanraju",
               },
               {
-                title: "Mobile Purchase App",
+                title: "CeleKt",
                 description:
                   "E-commerce platform for mobile phones with protection plans",
                 image:
@@ -235,7 +248,7 @@ function App() {
                 // link: "https://github.com/salmanraju",
               },
               {
-                title: "Dating App",
+                title: "Parents Who Dates",
                 description:
                   "Modern dating application with matching algorithm and real-time chat",
                 image:
@@ -243,7 +256,7 @@ function App() {
                 // link: "https://github.com/salmanraju",
               },
               {
-                title: "Pet App",
+                title: "Pet Zai",
                 description:
                   "Pet care and Pet Services platform with vet consultation features",
                 image:
