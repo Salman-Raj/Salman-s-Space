@@ -10,12 +10,27 @@ import {
   MonitorSmartphone,
   Database,
   ExternalLink,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 import { motion, AnimatePresence } from "framer-motion";
+import ParticlesBackground from "./components/ParticlesBackground";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -55,6 +70,9 @@ function App() {
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
+            <button onClick={toggleTheme} className="theme-toggle">
+              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
           </div>
         </nav>
 
@@ -74,6 +92,9 @@ function App() {
           <a href="#contact" onClick={toggleMenu}>
             Contact
           </a>
+          <button onClick={toggleTheme} className="theme-toggle" style={{ margin: '1rem 0 0 1rem', width: 'fit-content', gap: '8px' }}>
+            {theme === "light" ? <><Moon size={18} /> Enable Dark Mode</> : <><Sun size={18} /> Enable Light Mode</>}
+          </button>
         </div>
       </header>
 
@@ -92,13 +113,15 @@ function App() {
             zIndex: 0,
             pointerEvents: "none",
           }}
-        ></div>
+        >
+          <ParticlesBackground />
+        </div>
 
         <div className="hero-content">
           <div className="hero-text">
             <h1>
               Hi, I'm{" "}
-              <span style={{ color: "#5252d4" }}>
+              <span style={{ color: "var(--color-primary-light)" }}>
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={names[index]}
@@ -106,7 +129,11 @@ function App() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.5 }}
-                    style={{ display: "inline-block", color: "#5252d4" }}
+                    style={{
+                      display: "inline-block",
+                      color: "var(--color-primary-light)",
+                      textShadow: "0 0 20px rgba(99, 102, 241, 0.4)"
+                    }}
                   >
                     {names[index]}
                   </motion.span>
@@ -319,7 +346,7 @@ function App() {
               >
                 <Linkedin size={24} />
               </a>
-              <a href="mailto:msraj9664@gmail.com" className="social-link">
+              <a href="mailto:salman.makireddy@gmail.com" className="social-link">
                 <Mail size={24} />
               </a>
             </div>
